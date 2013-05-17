@@ -45,6 +45,10 @@ func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
   }
 }
 
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+  http.Redirect(w, r, "/view/FrontPage", http.StatusFound)
+}
+
 func makeHandler(fn func (http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
   return func(w http.ResponseWriter, r *http.Request) {
     // Here we will extract the page title from the Request,
@@ -87,6 +91,7 @@ func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 }
 
 func main() {
+  http.HandleFunc("/", rootHandler)
   http.HandleFunc("/view/", makeHandler(viewHandler))
   http.HandleFunc("/edit/", makeHandler(editHandler))
   http.HandleFunc("/save/", makeHandler(saveHandler))
