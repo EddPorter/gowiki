@@ -62,13 +62,6 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
   http.Redirect(w, r, "/view/"+title, http.StatusFound)
 }
 
-//func main() {
-//  p1 := &Page{Title: "TestPage", Body: []byte("This is a simple Page.")}
-//  p1.save()
-//  p2, _ := loadPage("TestPage")
-//  fmt.Println(string(p2.Body))
-//}
-
 func main() {
   http.HandleFunc("/view/", viewHandler)
   http.HandleFunc("/edit/", editHandler)
